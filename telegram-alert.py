@@ -1,10 +1,11 @@
 import json, requests, time, conf
 from boltiot import Bolt 
-
+# creating a bolt device instance
 mybolt=Bolt(conf.API_KEY, conf.DEVICE_ID)
+# setting error code
+ERROR_CODE = -999
 
-ERROR_CODE=-999
-
+# function to get temperature sensor value
 def getSensorValue(pin):
 	"""Receives the sensor value. Returns ERROR_CODE if request fails"""
 	try:		
@@ -26,6 +27,7 @@ def getSensorValue(pin):
 		print(e)	
 		return ERROR_CODE
 
+# function to send a message to the Telegram channel
 def sendTelegramMessage(message):
 	"""Sends alerts via telegram"""
 		# building bot url
@@ -51,6 +53,7 @@ def sendTelegramMessage(message):
 		print(e)
 		return False
 
+# driver method
 if __name__=="__main__":
 	while True:
 			# getting sensor values
